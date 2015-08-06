@@ -11,9 +11,9 @@
 
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/orgmode.css"/>
 
-add-apt-repository is quite a useful command these days, however, for some reason it is not often straight forward to
+add-apt-repository is quite a useful command these days. However, for some reason it is not often straight forward to
 install it. It has changed packages, has different package names for different distros, and in general its usually an
-unneeded hassle. Thanks to a [[https://blog.anantshri.info/content/uploads/2010/09/add-apt-repository.sh.txt][an old blog post]] by Anant Shrivastava, this could be as simple as =wget=ting that file!
+unneeded hassle. Thanks to a [[https://blog.anantshri.info/howto-add-ppa-in-debian/][an old blog post]] by Anant Shrivastava, this could be as simple as =wget= 'ting that file!
 
 #+Caption: In terminal, simply do:
 #+BEGIN_SRC sh
