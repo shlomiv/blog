@@ -24,6 +24,8 @@ module Jekyll
           write_tag_index(site, File.join(dir, tag), tag)
         end
       end
+      require 'fileutils'
+      FileUtils.cp_r "_site/tags/.", 'tags', :verbose => true
     end
 
     def write_tag_index(site, dir, tag)
