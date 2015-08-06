@@ -12,14 +12,14 @@ layout: default
 <h2>Tags:</h2>
 <ul>
   {% for tag in site.tags %}
-  <li><a href="/tags/{{tag | first}}">{{tag | first | capitalize }} ({{tag | last | size }})</a></li>
+  <li><a href="/blog/tags/{{tag | first}}">{{tag | first | capitalize }} ({{tag | last | size }})</a></li>
   {% endfor %}
 </ul>
 
 <p class="muted">
     Tags&nbsp;
     {% for tag in page.tags %}
-    <a href="/tag/{{ tag }}" title="{{ tag }}" rel="tag" class="btn btn-mini">{{ tag }}</a>
+    <a href="/blog/tag/{{ tag }}" title="{{ tag }}" rel="tag" class="btn btn-mini">{{ tag }}</a>
     {% endfor %}
   </p>
 
