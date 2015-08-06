@@ -1,0 +1,13 @@
+#+STARTUP: showall
+#+STARTUP: hidestars
+#+OPTIONS: H:2 num:nil tags:nil toc:nil timestamps:t
+#+LAYOUT: post
+#+AUTHOR: vadali
+#+DATE: 2015-08-06 Thu 01:37
+#+TITLE: first test
+#+DESCRIPTION: finding out if this works
+#+TAGS: test
+#+CATEGORIES:
+
+* Test this thing
+  How about it?
