@@ -1,0 +1,55 @@
+---
+layout: post
+title: Java 8 on Amazon EMR
+date: 2015-08-06
+categories:
+-
+tags:
+- java8
+- EMR
+- bootsrap action
+author: vadali
+excerpt: a bootstrap action for amazon EMR that installs java 8
+---
+<p>
+Recently I needed to use a library requiring java 8 on a large hadoop
+cluster running on Amazon EMR. I couldn't find any AMI's that has them
+installed, so I rolled my own with some help from google.
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name">java8-bootstrap-action.sh:</label>
+<pre class="src src-sh"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Check java version</span>
+<span style="color: #DFAF8F;">JAVA_VER</span>=$(java -version 2&gt;&amp;1 | sed <span style="color: #CC9393;">'s/java version "\(.*\)\.\(.*\)\..*"/\1\2/; 1q'</span>)
+
+<span style="color: #F0DFAF; font-weight: bold;">if</span> [ <span style="color: #CC9393;">"$JAVA_VER"</span> -lt 18 ]
+<span style="color: #F0DFAF; font-weight: bold;">then</span>
+    <span style="color: #DCDCCC; font-weight: bold;">echo</span> <span style="color: #CC9393;">"Getting add-apt-repository"</span>
+    wget --no-check-certificate --no-cookies <span style="color: #CC9393;">"https://blog.anantshri.info/content/uploads/2010/09/add-apt-repository.sh.txt"</span> -O add-apt-repository.sh
+
+    <span style="color: #DCDCCC; font-weight: bold;">echo</span> <span style="color: #CC9393;">"Adding oracle java ppa"</span>
+    sudo sh add-apt-repository.sh ppa:webupd8team/java
+
+    <span style="color: #DCDCCC; font-weight: bold;">echo</span> <span style="color: #CC9393;">"updating"</span>
+    sudo apt-get update
+
+    <span style="color: #DCDCCC; font-weight: bold;">echo</span> <span style="color: #CC9393;">"Setting up installation..."</span>
+    <span style="color: #DCDCCC; font-weight: bold;">echo</span> <span style="color: #CC9393;">"oracle-java8-installer shared/accepted-oracle-license-v1-1 select true"</span> | sudo debconf-set-selections
+
+    <span style="color: #DCDCCC; font-weight: bold;">echo</span> <span style="color: #CC9393;">"Installing..."</span>
+    sudo apt-get install -y oracle-java8-installer
+
+    <span style="color: #DCDCCC; font-weight: bold;">echo</span> <span style="color: #CC9393;">"Setting JAVA_HOME to java 8"</span>
+    <span style="color: #DCDCCC; font-weight: bold;">echo</span> <span style="color: #CC9393;">'export JAVA_HOME=/usr/lib/jvm/java-8-oracle'</span> &gt; /home/hadoop/conf/hadoop-user-env.sh
+<span style="color: #F0DFAF; font-weight: bold;">fi</span>
+
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Check java version again</span>
+<span style="color: #DFAF8F;">JAVA_VER</span>=$(java -version 2&gt;&amp;1 | sed <span style="color: #CC9393;">'s/java version "\(.*\)\.\(.*\)\..*"/\1\2/; 1q'</span>)
+
+<span style="color: #DCDCCC; font-weight: bold;">echo</span> <span style="color: #CC9393;">""</span>
+<span style="color: #DCDCCC; font-weight: bold;">echo</span> <span style="color: #CC9393;">"Java version is $JAVA_VER!"</span>
+<span style="color: #DCDCCC; font-weight: bold;">echo</span> <span style="color: #CC9393;">"JAVA_HOME: $JAVA_HOME"</span>
+<span style="color: #DCDCCC; font-weight: bold;">echo</span> <span style="color: #CC9393;">"JRE_HOME: $JRE_HOME"</span>
+<span style="color: #DCDCCC; font-weight: bold;">echo</span> <span style="color: #CC9393;">"PATH: $PATH"</span>
+</pre>
+</div>
