@@ -1,0 +1,18 @@
+#+STARTUP: showall
+#+STARTUP: hidestars
+#+OPTIONS: H:2 num:nil tags:nil toc:nil timestamps:t
+#+LAYOUT: default
+#+AUTHOR: vadali
+#+DATE: 2015-08-06 Thu 01:45
+#+TITLE: What is this?
+#+DESCRIPTION: lets test some things!
+#+TAGS: test
+#+CATEGORIES:
+
+* What is this thing??
+  Do you know?
+
+  #+BEGIN_SRC clojure
+    (defn test[now]
+      (inc now))
+  #+END_SRC
