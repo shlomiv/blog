@@ -1,0 +1,12 @@
+#+STARTUP: showall
+#+STARTUP: hidestars
+#+OPTIONS: H:2 num:nil tags:nil toc:nil timestamps:t
+#+LAYOUT: post
+#+AUTHOR: vadali
+#+DATE: 2015-08-06 Thu 01:48
+#+TITLE: Another thing to write home about
+#+DESCRIPTION: how about this
+#+TAGS: test
+#+CATEGORIES:
+
+*
