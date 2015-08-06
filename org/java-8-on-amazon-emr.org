@@ -9,6 +9,8 @@
 #+TAGS: java8,EMR,bootsrap action
 #+CATEGORIES:
 
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/orgmode.css"/>
+
 Recently I needed to use a library requiring java 8 on a large hadoop
 cluster running on Amazon EMR. I couldn't find any AMI's that has them
 installed, so I rolled my own with some help from google.
