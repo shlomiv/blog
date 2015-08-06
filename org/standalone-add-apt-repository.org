@@ -3,7 +3,7 @@
 #+OPTIONS: H:2 num:nil tags:nil toc:nil timestamps:t
 #+LAYOUT: post
 #+AUTHOR: Vadali
-#+DATE: 2015-08-06 Thu 11:41
+#+DATE: 2015-08-05 Thu 11:41
 #+TITLE: Standalone add-apt-repository
 #+DESCRIPTION: How to add add-apt-repository without the need to install any packages
 #+TAGS: Linux
