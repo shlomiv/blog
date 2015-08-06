@@ -3,7 +3,7 @@ layout: post
 title: Java 8 on Amazon EMR
 date: 2015-08-06
 categories:
--
+- Hadoop
 tags:
 - java8
 - EMR
@@ -13,43 +13,59 @@ excerpt: a bootstrap action for amazon EMR that installs java 8
 ---
 <p>
 Recently I needed to use a library requiring java 8 on a large hadoop
-cluster running on Amazon EMR. I couldn't find any AMI's that has them
-installed, so I rolled my own with some help from google.
+cluster running on Amazon EMR. I couldn't find any AMI's that has it
+installed. After some searching around, I found the gollowing <a href="https://gist.github.com/ericeijkelenboom/9951500">emr
+bootstrap on gist</a>, which is a yum based solution. Since I use debian
+based ami, I modified it slightly, as shown below.
+</p>
+
+<p>
+On emr ami, some applications uses java 7, while others uses
+java 6. In order to not mess things up, we would like that only our
+hadoop job will use java 8. To get that we need to set up <code>JAVA_HOME</code>
+in the right context, which is to place it under
+<code>/home/hadoop/conf/hadoop-user-env.sh</code>.
+</p>
+
+<p>
+In order to use this bootstrap action, simply paste this file
+somewhere on your s3 bucket, and make sure to register the full s3 url
+of this file as a bootsrap action to your cluster.
 </p>
 
 <div class="org-src-container">
 <label class="org-src-name">java8-bootstrap-action.sh:</label>
-<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">Check java version</span>
-<span class="org-variable-name">JAVA_VER</span>=$(java -version 2&gt;&amp;1 | sed <span class="org-string">'s/java version "\(.*\)\.\(.*\)\..*"/\1\2/; 1q'</span>)
+<pre class="src src-sh"># Check java version
+JAVA_VER=$(java -version 2&gt;&amp;1 | sed 's/java version "\(.*\)\.\(.*\)\..*"/\1\2/; 1q')
 
-<span class="org-keyword">if</span> [ <span class="org-string">"$JAVA_VER"</span> -lt 18 ]
-<span class="org-keyword">then</span>
-    <span class="org-builtin">echo</span> <span class="org-string">"Getting add-apt-repository"</span>
-    wget --no-check-certificate --no-cookies <span class="org-string">"https://blog.anantshri.info/content/uploads/2010/09/add-apt-repository.sh.txt"</span> -O add-apt-repository.sh
+if [ "$JAVA_VER" -lt 18 ]
+then
+    echo "Getting add-apt-repository"
+    wget --no-check-certificate --no-cookies "https://blog.anantshri.info/content/uploads/2010/09/add-apt-repository.sh.txt" -O add-apt-repository.sh
 
-    <span class="org-builtin">echo</span> <span class="org-string">"Adding oracle java ppa"</span>
+    echo "Adding oracle java ppa"
     sudo sh add-apt-repository.sh ppa:webupd8team/java
 
-    <span class="org-builtin">echo</span> <span class="org-string">"updating"</span>
+    echo "updating"
     sudo apt-get update
 
-    <span class="org-builtin">echo</span> <span class="org-string">"Setting up installation..."</span>
-    <span class="org-builtin">echo</span> <span class="org-string">"oracle-java8-installer shared/accepted-oracle-license-v1-1 select true"</span> | sudo debconf-set-selections
+    echo "Setting up installation..."
+    echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
 
-    <span class="org-builtin">echo</span> <span class="org-string">"Installing..."</span>
+    echo "Installing..."
     sudo apt-get install -y oracle-java8-installer
 
-    <span class="org-builtin">echo</span> <span class="org-string">"Setting JAVA_HOME to java 8"</span>
-    <span class="org-builtin">echo</span> <span class="org-string">'export JAVA_HOME=/usr/lib/jvm/java-8-oracle'</span> &gt; /home/hadoop/conf/hadoop-user-env.sh
-<span class="org-keyword">fi</span>
+    echo "Setting JAVA_HOME to java 8"
+    echo 'export JAVA_HOME=/usr/lib/jvm/java-8-oracle' &gt; /home/hadoop/conf/hadoop-user-env.sh
+fi
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Check java version again</span>
-<span class="org-variable-name">JAVA_VER</span>=$(java -version 2&gt;&amp;1 | sed <span class="org-string">'s/java version "\(.*\)\.\(.*\)\..*"/\1\2/; 1q'</span>)
+# Check java version again
+JAVA_VER=$(java -version 2&gt;&amp;1 | sed 's/java version "\(.*\)\.\(.*\)\..*"/\1\2/; 1q')
 
-<span class="org-builtin">echo</span> <span class="org-string">""</span>
-<span class="org-builtin">echo</span> <span class="org-string">"Java version is $JAVA_VER!"</span>
-<span class="org-builtin">echo</span> <span class="org-string">"JAVA_HOME: $JAVA_HOME"</span>
-<span class="org-builtin">echo</span> <span class="org-string">"JRE_HOME: $JRE_HOME"</span>
-<span class="org-builtin">echo</span> <span class="org-string">"PATH: $PATH"</span>
+echo ""
+echo "Java version is $JAVA_VER!"
+echo "JAVA_HOME: $JAVA_HOME"
+echo "JRE_HOME: $JRE_HOME"
+echo "PATH: $PATH"
 </pre>
 </div>

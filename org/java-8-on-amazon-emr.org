@@ -7,13 +7,25 @@
 #+TITLE: Java 8 on Amazon EMR
 #+DESCRIPTION: a bootstrap action for amazon EMR that installs java 8
 #+TAGS: java8,EMR,bootsrap action
-#+CATEGORIES:Hadoop
+#+CATEGORIES: Hadoop
 
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/orgmode.css"/>
 
 Recently I needed to use a library requiring java 8 on a large hadoop
-cluster running on Amazon EMR. I couldn't find any AMI's that has them
-installed, so I rolled my own with some help from google.
+cluster running on Amazon EMR. I couldn't find any AMI's that has it
+installed. After some searching around, I found the gollowing [[https://gist.github.com/ericeijkelenboom/9951500][emr
+bootstrap on gist]], which is a yum based solution. Since I use debian
+based ami, I modified it slightly, as shown below.
+
+On emr ami, some applications uses java 7, while others uses
+java 6. In order to not mess things up, we would like that only our
+hadoop job will use java 8. To get that we need to set up =JAVA_HOME=
+in the right context, which is to place it under
+=/home/hadoop/conf/hadoop-user-env.sh=.
+
+In order to use this bootstrap action, simply paste this file
+somewhere on your s3 bucket, and make sure to register the full s3 url
+of this file as a bootsrap action to your cluster.
 
 #+Caption: java8-bootstrap-action.sh:
 #+BEGIN_SRC sh :exports code
