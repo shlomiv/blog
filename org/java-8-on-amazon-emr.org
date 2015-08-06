@@ -7,7 +7,7 @@
 #+TITLE: Java 8 on Amazon EMR
 #+DESCRIPTION: a bootstrap action for amazon EMR that installs java 8
 #+TAGS: java8,EMR,bootsrap action
-#+CATEGORIES:
+#+CATEGORIES:Hadoop
 
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/orgmode.css"/>
 
