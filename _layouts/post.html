@@ -2,20 +2,6 @@
 layout: default
 ---
 <div class="right">
-  <ul class="tag-box inline">
-    <h1>Categories:</h1>
-{% assign tags_list = site.categories %}
-  {% if tags_list.first[0] == null %}
-    {% for tag in tags_list %}
-      <li><a href="#{{ tag }}">{{ tag | capitalize }} <span>{{ site.tags[tag].size }}</span></a></li>
-    {% endfor %}
-  {% else %}
-    {% for tag in tags_list %}
-      <li><a href="#{{ tag[0] }}">{{ tag[0] | capitalize }} <span>{{ tag[1].size }}</span></a></li>
-    {% endfor %}
-  {% endif %}
-{% assign tags_list = nil %}
-</ul>
 <h2>Categories:</h2>
 <ul>
   {% for category in site.categories %}
@@ -23,14 +9,14 @@ layout: default
   {% endfor %}
 </ul>
 
-<h2>Archive:</h2>
+<h2>Tags:</h2>
 <ul>
-  {% for monthly_archive in site.monthly_archives reversed %}
-  <li>
-    <a href="{{ site.baseurl }}/{{ monthly_archive.url }}">{{ monthly_archive.name | capitalize }}</a> ({{ monthly_archive.posts | size }} posts)
-  </li>
+  {% for category in site.categories %}
+  <li><a href="/tags/{{tag | first}}">{{tag | first | capitalize }} ({{tag | last | size }})</a></li>
   {% endfor %}
 </ul>
+
+
 </div>
 
 <div class="post">
