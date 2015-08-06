@@ -2,14 +2,14 @@
 layout: default
 title: Home
 ---
-
-<div class="blog-index">
+<div style="width: 100%; display: flex;">
+<div class="blog-index" style="flex-grow: 1;">
   {% assign post = site.posts.first %}
   {% assign content = post.content %}
   {% include post_detail.html %}
 </div>
 
-<div class="home">
+<div class="home" style="width: 200px;">
 
   <h1 class="page-heading">Posts</h1>
 
@@ -27,4 +27,5 @@ title: Home
 
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
 
+</div>
 </div>
