@@ -16,6 +16,12 @@ layout: default
   {% endfor %}
 </ul>
 
+<p class="muted">
+    Tags&nbsp;
+    {% for tag in page.tags %}
+    <a href="/tag/{{ tag }}" title="{{ tag }}" rel="tag" class="btn btn-mini">{{ tag }}</a>
+    {% endfor %}
+  </p>
 
 </div>
 
