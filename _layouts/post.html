@@ -11,8 +11,8 @@ layout: default
 
 <h2>Tags:</h2>
 <ul>
-  {% for category in site.categories %}
-  <li><a href="/tags/{{tag | first}}">{{tag | first | capitalize }} ({{tag | last | size }})</a></li>
+  {% for tag in site.tags %}
+  <li><a href="/tags/{{tag | first}}">{{tag | capitalize }} ({{tag | last | size }})</a></li>
   {% endfor %}
 </ul>
 
