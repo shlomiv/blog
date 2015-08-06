@@ -202,7 +202,5 @@ pre {
         }
     }
 }
-.wrapper{position:relative;}
-.right,.left{width:50%; position:absolute;}
-.right{right:0;}
-.left{left:0;}
+.right{float: right; }
+.left{float: left;}
