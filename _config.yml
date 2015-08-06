@@ -13,4 +13,9 @@ baseurl: /blog
 # Build settings
 markdown: kramdown
 pagination: 2
-paginate_path: "/blog/page:num/"
+
+permalink: /:year/:month/:day/:title/
+
+tag_page_layout: tag_page
+tag_page_dir: tag
+tag_permalink_style: pretty
