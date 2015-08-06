@@ -23,6 +23,8 @@ hadoop job will use java 8. To get that we need to set up =JAVA_HOME=
 in the right context, which is to place it under
 =/home/hadoop/conf/hadoop-user-env.sh=.
 
+Since we would like to use a ppa to install java 8, take a look at [this post]({% post_url 2015-08-06-standalone-add-apt-repository %})
+
 In order to use this bootstrap action, simply paste this file
 somewhere on your s3 bucket, and make sure to register the full s3 url
 of this file as a bootsrap action to your cluster.

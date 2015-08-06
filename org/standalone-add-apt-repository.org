@@ -1,0 +1,30 @@
+#+STARTUP: showall
+#+STARTUP: hidestars
+#+OPTIONS: H:2 num:nil tags:nil toc:nil timestamps:t
+#+LAYOUT: post
+#+AUTHOR: Vadali
+#+DATE: 2015-08-06 Thu 11:41
+#+TITLE: Standalone add-apt-repository
+#+DESCRIPTION: How to add add-apt-repository without the need to install any packages
+#+TAGS: Linux
+#+CATEGORIES: devops
+
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/orgmode.css"/>
+
+add-apt-repository is quite a useful command these days, however, for some reason it is not often straight forward to
+install it. It has changed packages, has different package names for different distros, and in general its usually an
+unneeded hassle. Thanks to a [[https://blog.anantshri.info/content/uploads/2010/09/add-apt-repository.sh.txt][an old blog post]] by Anant Shrivastava, this could be as simple as =wget=ting that file!
+
+#+Caption: In terminal, simply do:
+#+BEGIN_SRC sh
+wget --no-check-certificate --no-cookies "https://blog.anantshri.info/content/uploads/2010/09/add-apt-repository.sh.txt"  -O add-apt-repository.sh
+#+END_SRC
+
+So for example, say you want to install the lovely emacs 24 from a package, you could simply do:
+#+BEGIN_SRC sh
+sudo sh add-apt-repository.sh ppa:cassou/emacs
+sudo apt-get update
+sudo apt-get install emacs24
+#+END_SRC
+
+And all should be set!
