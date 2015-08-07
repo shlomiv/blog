@@ -30,9 +30,8 @@ sudo apt-get install emacs24
 And all should be set!
 
 
-
-** Update
-   For completness, here is the contents of add-apt-repository inlined, justs in case :)
+#+html: <hr>
+For completness, here is the contents of add-apt-repository inlined, justs in case :)
 
 #+Caption: add-apt-repository.sh:
 #+BEGIN_SRC sh
