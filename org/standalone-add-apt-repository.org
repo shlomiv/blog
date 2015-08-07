@@ -27,9 +27,14 @@ sudo apt-get update
 sudo apt-get install emacs24
 #+END_SRC
 
-For completness, here is the contents of add-apt-repository inlined, justs in case :)
+And all should be set!
 
-#+Caption add-apt-repository.sh:
+
+
+** Update
+   For completness, here is the contents of add-apt-repository inlined, justs in case :)
+
+#+Caption: add-apt-repository.sh:
 #+BEGIN_SRC sh
 #!/bin/bash
 if [ $# -eq 1 ]
@@ -55,5 +60,3 @@ else
 	echo "$0 ppa:user/ppa-name"
 fi
 #+END_SRC
-
-And all should be set!
