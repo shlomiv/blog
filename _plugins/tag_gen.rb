@@ -25,7 +25,7 @@ module Jekyll
         end
       end
       require 'fileutils'
-      FileUtils.cp_r "_site/tags/.", 'tags', :verbose => true
+      FileUtils.cp_r "_site/tags/.", 'tags', :verbose => false
     end
 
     def write_tag_index(site, dir, tag)

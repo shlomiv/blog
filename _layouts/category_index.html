@@ -1,0 +1,31 @@
+---
+layout: default
+---
+<h2>{{page.title}}</h2>
+<table class="table table-striped">
+  <tbody>
+    {% for post in site.posts %}
+    {% for category in post.categories %}
+    {% if category == page.category %}
+
+    <tr>
+      <td>
+        <p>
+          <h3>
+            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          </h3>
+          <strong>{{ post.date | date: "%B %e, %Y" }}</strong> {{ post.category }}
+          <small><i>{{ post.summary }}</i></small>
+          <small><i class="icon-categories"></i>
+            {% for category in post.categories %}
+            <a href="/blog/categories/{{ category }}" title="View posts categoryged with &quot;{{ category }}&quot;"><u>{{ category }}</u></a>
+            {% if forloop.last != true %} {% endif %} {% endfor %}
+          </small>
+        </p>
+      </td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+  </tbody>
+</table>
