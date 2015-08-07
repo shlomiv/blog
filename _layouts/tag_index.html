@@ -9,10 +9,10 @@ layout: default
           {% if tag == page.tag %}
           <tr>
             <td>
-      	      <h3><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h3>
-      	      <p><strong>{{ post.date | date: "%B %e, %Y" }}</strong>  {{ post.category }}
-	        <small><i>{{ post.summary }}</i></small>
-	        ><small><i class="icon-tags"></i> {% for tag in post.tags %} <a href="/blog/tags/{{ tag }}" title="View posts tagged with &quot;{{ tag }}&quot;"><u>{{ tag }}</u></a>  {% if forloop.last != true %} {% endif %} {% endfor %} </small></p>
+              <h3><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h3>
+              <p><strong>{{ post.date | date: "%B %e, %Y" }}</strong>  {{ post.category }}
+                <small><i>{{ post.summary }}</i></small>
+                <small><i class="icon-tags"></i> {% for tag in post.tags %} <a href="/blog/tags/{{ tag }}" title="View posts tagged with &quot;{{ tag }}&quot;"><u>{{ tag }}</u></a>  {% if forloop.last != true %} {% endif %} {% endfor %} </small></p>
             </td>
           </tr>
           {% endif %}

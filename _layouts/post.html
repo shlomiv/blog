@@ -2,7 +2,7 @@
 layout: default
 ---
 <div class="right">
-<h2>NEW Categories:</h2>
+<h2>Categories:</h2>
 <ul>
   {% for category in site.categories %}
   <li><a href="/blog/categories/{{category | first}}">{{category | first | capitalize }} ({{category | last | size }})</a></li>
@@ -16,13 +16,6 @@ layout: default
   {% endfor %}
 </ul>
 
-<p class="muted">
-    Tags&nbsp;
-    {% for tag in page.tags %}
-    <a href="/blog/tag/{{ tag }}" title="{{ tag }}" rel="tag" class="btn btn-mini">{{ tag }}</a>
-    {% endfor %}
-  </p>
-
 </div>
 
 <div class="post">
@@ -31,6 +24,12 @@ layout: default
     <h1 class="post-title">{{ page.title }}</h1>
     <p class="post-meta">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
 
+   <p class="muted">
+    Tags&nbsp;
+    {% for tag in page.tags %}
+    <a href="/blog/tags/{{ tag }}" title="{{ tag }}" rel="tag" class="btn btn-mini">{{ tag }}</a>
+    {% endfor %}
+  </p>
   </header>
 
   <article class="post-content">
