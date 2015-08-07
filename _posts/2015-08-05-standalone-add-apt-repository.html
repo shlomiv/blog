@@ -33,5 +33,40 @@ sudo apt-get install emacs24
 </div>
 
 <p>
+For completness, here is the contents of add-apt-repository inlined, justs in case :)
+</p>
+
+<p>
+#+Caption add-apt-repository.sh:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+<span class="org-keyword">if</span> [ $<span class="org-variable-name">#</span> -eq 1 ]
+<span class="org-variable-name">NM</span>=<span class="org-sh-quoted-exec">`uname -a &amp;&amp; date`</span>
+<span class="org-variable-name">NAME</span>=<span class="org-sh-quoted-exec">`echo $NM | md5sum | cut -f1 -d" "`</span>
+<span class="org-keyword">then</span>
+        <span class="org-variable-name">ppa_name</span>=<span class="org-sh-quoted-exec">`echo "$1" | cut -d":" -f2 -s`</span>
+        <span class="org-keyword">if</span> [ -z <span class="org-string">"$ppa_name"</span> ]
+        <span class="org-keyword">then</span>
+                <span class="org-builtin">echo</span> <span class="org-string">"PPA name not found"</span>
+                <span class="org-builtin">echo</span> <span class="org-string">"Utility to add PPA repositories in your debian machine"</span>
+                <span class="org-builtin">echo</span> <span class="org-string">"$0 ppa:user/ppa-name"</span>
+        <span class="org-keyword">else</span>
+                <span class="org-builtin">echo</span> <span class="org-string">"$ppa_name"</span>
+                <span class="org-builtin">echo</span> <span class="org-string">"deb http://ppa.launchpad.net/$ppa_name/ubuntu lucid main"</span> &gt;&gt; /etc/apt/sources.list
+                apt-get update &gt;&gt; /dev/null 2&gt; /tmp/${<span class="org-variable-name">NAME</span>}_apt_add_key.txt
+                <span class="org-variable-name">key</span>=<span class="org-sh-quoted-exec">`cat /tmp/${NAME}_apt_add_key.txt | cut -d":" -f6 | cut -d" " -f3`</span>
+                apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $<span class="org-variable-name">key</span>
+                rm -rf /tmp/${<span class="org-variable-name">NAME</span>}_apt_add_key.txt
+        <span class="org-keyword">fi</span>
+<span class="org-keyword">else</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"Utility to add PPA repositories in your debian machine"</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"$0 ppa:user/ppa-name"</span>
+<span class="org-keyword">fi</span>
+</pre>
+</div>
+
+<p>
 And all should be set!
 </p>
